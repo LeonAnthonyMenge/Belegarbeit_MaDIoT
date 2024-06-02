@@ -1,0 +1,96 @@
+\documentclass[
+    a4paper,
+    pagesize,
+	pdftex,
+    12pt,
+]{scrartcl}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage[unicode=true]{hyperref}
+\usepackage[draft=false,babel,tracking=true,kerning=true,spacing=true]{microtype}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+
+\graphicspath{{./images/}}
+
+\pagestyle{fancy}
+\lhead{D. Storch, L. Menge, L. Wozniak} % Bitte auch hier ihre Namen in Form "J. Schroeder"
+\rhead{\includegraphics[height=10mm]{S04_HTW_Berlin_Logo_pos_FARBIG_RGB.jpg}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0.6pt}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \includegraphics[height=25mm]{S04_HTW_Berlin_Logo_pos_FARBIG_RGB.jpg} \\
+        \vspace{1.0cm}
+
+        MaDIoT 2.0
+    
+        \vspace{1.5cm}   
+
+        \textbf{Belegarbeit im Modul Informationssicherheit}
+
+        \vspace{1.5cm}
+
+        vorgelegt von \\
+        \textbf{
+        \\ \\
+        Laura Wozniak, 580635\\ \\
+        Daniel Alexander Storch: 585481\\ \\
+        Léon Anthony Menge: 584337
+        }%Vor-, Nachname, Matrikelnummer
+
+        \vspace{1.5cm}    
+        Berlin, \today\\
+    \end{center}
+\end{titlepage}
+
+\pagenumbering{gobble}
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\begin{multicols}{2}
+\chapter{Abstract}
+\begin{abstract}
+Die vorliegende Belegarbeit dient der Analyse und Einordnung im Kontext der aktuellen Forschung zu der Arbeit: "MaDIoT 2.0: Modern High-Wattage IoT Botnet Attacks and Defenses" \cite{280016}. In dieser untersuchen Shekari et al. die potenziellen Auswirkungen von sogenannten "Manipulation of Demand via IoT" (MaDIoT)-Angriffen auf das Stromnetz. In der folgenden Belegarbeit werden Inhalte der genannten Arbeit neu aufgegriffen, weiter erläutert und auch unter der Berücksichtigung anderer Arbeiten kritisch reflektiert und bewertet. Unter anderem werden wir im Folgenden möglichen Lösungen im Zusammenhang mit MaDIoT-Angriffen darlegen.
+\end{abstract}
+
+\section{Einführung}
+Die rasante Entwicklung und Verbreitung des Internet of Things (IoT) in den letzten Jahren, durch beispielsweise Smarthomes, Wearables oder vernetzte Fahrzeuge, beeinflusst und simplifiziert unser alltägliches Leben immer mehr. Gleichzeitig birgt die zunehmende Vernetzung von Hochleistungs-IoT-Geräten jedoch auch erhebliche Risiken für kritische Infrastrukturen, insbesondere für die Stromnetze. Bei sogenannten MaDIoT Angriffen, welche sich vor allem auf das Stromnetz beschränken, werden kompromittierte IoT-Geräte genutzt, um den Stromverbrauch abrupt zu verändern und somit die Stabilität von Stromnetzen zu gefährden. Mittels Botnetze aus Hochleistungs-IoT-Geräten, wie z. B. Elektrofahrzeug-Ladegeräte, werden plötzliche Veränderungen im Stromnetz verursacht, um so anschließend beispielsweise Frequenzinstabilitäten  hervorzurufen. Die Forschung von MaDIoT-Angriffen ist relativ neu, jedoch gibt es bereits mehrere bedeutende Arbeiten, die die Gefährdung und die möglichen Schutzmaßnahmen analysieren. So beschreiben Soltan et al. die grundlegende Bedrohung durch MaDIoT-Angriffe und weisen auf die potenziellen Schäden hin, die durch koordinierte Angriffe auf Hochleistungs-IoT-Geräte entstehen können. Dazu gehören auch erhöhte Betriebskosten als auch die Beeinträchtigung der gesamten Stromversorgung durch Leitungsausfällen\cite{soltan2018protecting}. Jedoch lassen sich die Auswirkungen dieser Angriffe auch vermeiden. Huang et al. erläutern, dass bestehende Schutzmechanismen im Stromnetz die Auswirkungen solcher Angriffe erheblich mindern können. \cite{huang2019protecting} Insbesondere unterstrichen sie die Wirksamkeit von Unterfrequenz-Lastabwurf und die zeitliche Verzögerung beim Abschalten überlasteter Übertragungsleitungen. Shekari et al. erweitern diese Diskussion in Ihrer Arbeit durch die Einführung des MaDIoT 2.0-Angriffs. Dieser zeigt, dass durch eine punktuelle Aktivierung von Geräten in bestimmten geografischen Bereichen unter der Berücksichtigung von Spannungsstabilitätsindizes eine höhere Erfolgsrate erzielt werden kann. Diese neue Angriffsmethode erfordert weniger aktive Geräte im Botnetz und ist somit in praktischen Situationen effektiver.
+\newpage
+\section{Hauptteil}
+In diesem Abschnitt werden wir verschiedene Aspekte des in der Einführung erwähnten Papers genauer beleuchten. Wir werden die Gemeinsamkeiten mittels anderer Arbeiten erweitern, aber auch auf die Unterschiede beziehungsweise fehlende Informationen ergänzen. Hierfür werden wir den Fokus auf die Test-Cases, die offline Analyse und die Gegenmaßnahmen setzen.
+\subsection{Test Cases}
+Um die gegebenen Testfälle von Shekari et al.\cite{280016} validieren bzw. kritisch hinterfragen zu können, werden im Folgenden die Vorgehensweise und die Ergebnisse mit einer ähnlichen Arbeit von Wooding et al. verglichen\cite{wooding2023formal}. Diese Arbeit zielt darauf ab, formale Kontrollmethoden zur Steuerung New England 39-bus Test System (NETS) anzuwenden.\\ \\Bei dem in New England eingesetzten Stromnetz (IEE 39-Bus-Testsystem) werden 39 Knoten mit 32 Übertragungsleitungen, 24 Leistungsformatoren und 10 Generatoren genutzt. Das Testsystem hat eine Grundlast von 6097.1 MW aktiver Last und 1408.9 MVAr reaktive Last. Shekari et al. haben neben dem 39-Bus-Test auch den 9-Bus-Test durchgeführt. Im Folgenden werden wir uns allerdings auf den 39-Bus-Test beschränken. Dieser Test hatte eine Testdauer von 24 Stunden. Durch die gleichmäßige Auslastung des Stromnetzes von Tag zu Tag kann laut Shekari et al. ein gesamtes Jahr abgebildet werden. Dieser Test soll die Effektivität von MaDIoT 2.0 Angriffen messen und deren Erfolgswahrscheinlichkeit aufzeigen. Durch diesen Test konnten Shekari et al. nachweisen, dass MaDIoT 2.0 eine höhere Erfolgsrate haben als die ältere Variante MaDIoT.\\ \\Die Tests in der Arbeit von Wooding et al. verfolgen zwar ein anderes Ziel als die Tests in der Arbeit von Shekari et al. aber durch den Vergleich der Vorgehensweise kann der Test von Shekari et al. validiert werden. Trotz desselben Simulationssystems (39-Bus-System) wird der Aufbau der Tests unterschiedlich modelliert. Wooding et al. nutzen eine Kombination aus Modellordnungsreduktion und einer relationalen Steuerfunktion mit Störungsraffinement. Sie verwenden ebenfalls ein umfangreiches mathematisches Modell, welches die Frequenzverbindung zwischen den benachbarten Gebieten berücksichtigt. Shekari et al. hingegen verwenden wiederum ein Modell der Generatordynamik und spezielle Modelle für Aufregersysteme. Um die statischen und dynamischen Teile des Systems zu repräsentieren, wird ein kombiniertes Lastmodell verwendet.\\ \\Aufgrund der verschiedenen Modellierungsweisen der Tests stellen wir die Korrektheit der Tests von Shekari et al. in Frage. Des Weiteren weisen wir darauf hin, dass laut Rodríguez-Pérez et al. die Erfolgsquote von MaD Angriffen  nicht zwangsweise auf eine hohe Auswirkung auf das System hindeutet\cite{Rodriguez-Perez-confronting-thread}.
+\subsection{Offline Analyse}
+Die Offline-Analyse von MaDIoT 2.0 umfasst die Sammlung und Auswertung von Informationen über das Stromnetz, um potenziellen Angreifern eine höhere Chance für einen erfolgreichen Angriff zu ermöglichen. Die Analyse konzentriert sich hauptsächlich auf die technischen Details vom Aufbau des Stromnetzes sowie von der Erfassung von Umspannwerken und Stromleitungen. Mit den Informationen wurde eine Analyse für die Spannungsstabilität von Knotenpunkten durchgeführt. Die Knotenpunkte, die am schlechtesten abgeschnitten hatten, sind Schwachstellen im Stromnetz, die am anfälligsten für Attacken sind. Ein Angriff auf eine Schwachstelle reduziert den Aufwand, der benötigt ist, um einen Ausfall zu erzeugen.
+Stromnetze werden in der Regel selten verändert, das führt dazu, dass eine einmalige Analyse in den meisten Fällen ausreichend ist, um Informationen für einen möglichen Angriff zu sammeln. Shekari et al. kritisieren die einfache Zugänglichkeit von Informationen im Internet aufgrund von Deregulierung im Energiemarkt einfacher erreichbar ist\cite{280016}. Dadurch, dass die benötigten Informationen öffentlich zugänglich sind, oder durch Beobachtungen gewonnen werden können, sind Angreifer nicht auf Phishing oder andere Formen des Social Engineerings angewiesen, um Wissen über ihr Ziel zu sammeln.\\ \\In dem Artikel von Rodríguez-Pérez et al. wurde eine ähnliche MaDIoT-Analyse unter Verwendung desselben Stromnetzmodells „IEEE 39“ durchgeführt. Darüber hinaus basierte die Analyse auf der Annahme, dass Angreifer ohne vorheriges Wissen über das Stromnetz erfolgreich einen Angriff auf das IEEE 39-Modell durchführen konnten\cite{Confronting_the_Threat}. Die Autoren Rodríguez-Pérez et al. stellten fest \glqq The attacker does not need advanced knowledge of the grid: by performing its attack during the peak demand hour, the probability of success could be high\grqq{}\cite{Confronting_the_Threat}. Jedoch wurde von Rodríguez-Pérez et al. hervorgehoben, dass sie in ihrer Analyse, im Gegensatz zu Shekari et al., ohne ein Lastmuster arbeiteten, was zu Abweichungen zwischen den Ergebnissen der beiden Untersuchungen führen könnte. Dieser Punkt deutet darauf hin, dass für eine erfolgreiche Durchführung einer Attacke weniger detaillierte Kenntnisse benötigt werden, wenn ein Angreifer das fehlende Wissen mit einer hohen Anzahl an IoT Geräten kompensieren kann. Trotz dessen betonen Dabrowski et al. dass jegliche Art von öffentlichen Informationen von Angreifern ausgenutzt werden kann, um ihre Angriffe zu strategieren.\cite{inproceedings} In ihrer Arbeit beschreiben sie \glqq TSO’s (Transmission System Operators) publish their line state on the web. Even though they are delayed in time, it gives an attacker a good insight on when the line is usually loaded the most\grqq{} \cite{inproceedings}. Diese Aussage bezieht sich auf Übertragungsnetzbetreiber, die Informationen über ihren aktuellen Betriebszustand veröffentlichen. Oftmals offenbaren sich dadurch Informationen über Leistungsfähigkeit, derzeitige Last, Wartungsarbeiten oder Ausfälle an die Angreifer. Diese Transparenz, die eigentlich dazu gedacht ist, um im Wettbewerb auf dem Energiemarkt mitzuhalten, kann somit zweckentfremdet werden, um möglichen Angreifern eine Angriffsfläche zu bieten. 
+\subsection{Gegenmaßnahmen}
+Um das Stromnetz vor MaD Angriffen von IoT Bots mit hohem Stromverbrauch zu schützen, haben Soltan et al. zwei Algorithmen entwickelt \cite{soltan2018protecting}. Diese sind in der Lage, den Schutz des Stromnetzes zu verbessern. Die beiden Algorithmen: \glqq Securing Aditional dispatch\grqq{} (SAFE) Algorithmus und \glqq Iteratively MiniMize and boUNd Economic\grqq{} (IMMUNE) Algorythmus sollen robuste Betriebspunkte für die Generatoren berechnen, sodass keine Stromleitungen überlasten. \\ \\ Auch wenn laut Soltan et al. aufgrund der steigenden Anzahl an cyber Angriffen die SCADA Systeme von einigen Generatoren keinen Zugang mehr zum Internet haben, um diese vor den Angriffen zu schützen, können diese dadurch nicht vor MaD Angriffen geschützt werden. Durch das ein beziehungsweise Abschalten von IoT Bots mit einem hohen Stromverbrauch, kann die Stromnachfrage so manipuliert werden, dass die Stromleitungen überlasten und die Generatoren sich abschalten. Woraus anschließend ein Blackout resultieren kann. Die von Soltan et al. entwickelten Algorythmen sollen genau das verhindern.
+\subsubsection{SAFE Algorithmus}
+Der SAFE Algorithmus liefert robuste Betriebspunkte für die Generatoren, indem es ein einziges lineares Programm löst. Er berechnet die maximal möglichen Energieänderungen der Stromleitungen, die angegriffen werden und durch welche anderen Stromleitungen diese am besten ausgeglichen werden können. \\ \\ Die maximale Schwankung der Stromleitungen ist stark von deren Standort und ihren Energiereserven abhängig. Um die Beziehung zwischen den Stromflussschwankungen und der Nachfrage linear zu halten, können alle Generatoren so angepasst werden, dass diese immer genug Reserven haben \cite{soltan2018protecting}. Wenn alle Generatoren genug Reserven haben, sind diese in der Lage einen abrupten Nachfrageanstieg zu kompensieren. Auch wenn der SAFE Algorithmus gut beim Berechnen von robusten Betriebspunkten performt, ist er der teuerste und möglicherweise nicht in der Lage, Angriffen von großem Ausmaß standzuhalten.
+\subsubsection{IMMUNE Aglorithmus}
+Der IMMUNE Algorithmus ist ein iterativer Algorithmus, welcher das optimale Stromflussproblem löst und die Leistungskapazität aktualisiert, um ein robustes Netz sicherzustellen \cite{soltan2018protecting}. Sollte bei der Berechnung auffallen, dass ein Netzwerk überlastet ist, können entsprechende Maßnahmen eingeleitet werden, welche dafür sorgen, dass andere Netzwerke für den Ausgleich sorgen. Ein Vorteil des IMMUNE Algorithmus ist, dass dieser leicht parallelisiert werden kann. Dadurch können alle Iterationen gleichzeitig ausgeführt und müssen nicht nacheinander durchgeführt werden.\\ \\ Soltan et al. haben weitere Versionen des IMMUNE Algorithmus entwickelt. Diese sind in der Lage, die Berechnung schneller abzuschließen, sind dafür aber mit höheren Kosten verbunden.\\ \\ Grundsätzlich empfehlen sie die Kombination beider Algorithmen. Sie weisen aber auch darauf hin, dass die Algorithmen nicht allen Angriffen standhalten können. Des Weiteren sind sie auf ein Stromnetz angewiesen, welches temporär überlastet werden kann.
+\subsubsection{Gegenüberstellung}
+Shekari et al. schreiben, dass es ausschließlich zwei Schutzmaßnahmen gibt, welche das Stromnetz vor solchen Angriffen schützen können. Die erste beschriebene Methode nennen sie \glqq under-frequency load shedding\grqq{} (UFLS). Hier wird Stück für Stück Energie abgebaut, um so das Gleichgewicht zwischen Angebot und Nachfrage wieder herzustellen. Die zweite erwähnte Methode heißt UVLS \cite{280016}. \\ \\ Wir konnten allerdings im Laufe der Recherche für diese Arbeit herausfinden, dass es weitere Methoden gibt, um das Stromnetz zu schützen. Wie die eben erwähnten Algorithmen. Obwohl die Arbeit von Shekari et al. nach der von Soltan et al. erschien, sind sie in ihrer Arbeit nicht auf diese eingegangen. Auch wenn Soltan et al. am Ende ihrer Arbeit ähnlich wie Shekari et al. schreiben, dass ihre entwickelten Algorithmen noch nicht die finale Lösung sind und sie Schwachstellen haben, hätten diese zumindest erwähnt werden sollen.
+\newpage
+\section{Fazit}
+Die aktuelle Bedrohung durch MaDIoT 2.0 Angriffe kann sowohl aus der Arbeit von Shekari et al. als auch aus unserer Zusammenfassung weiterer Arbeiten belegt werden \cite{280016}. Allerdings konnten wir fehlende und fragwürdige Punkte in der Arbeit von Shekari et al. feststellen. \\ \\ Die Zugänglichkeit von Informationen der Stromnetzwerke ist in der Realität wesentlich leichter als in der Arbeit von Shekari et al. beschrieben wurde. Ob ein Angriff erfolgreich ist, kann leicht online in \glqq Grid Monitoren\grqq{} eingesehen beziehungsweise nachverfolgt werden. \\ \\
+Auch die Relevanz der Tests kann hinterfragt werden, da im Vergleich mit einem anderen Test, welcher allerdings dasselbe Test-Modell nutzt, aufgefallen ist das diese unterschiedliche Modellierungsweisen nutzen. Der Zusammenhang zwischen der Erfolgsquote und der tatsächlichen Auswirkung auf das Stromnetz kann ebenfalls infrage gestellt werden.\\ \\ Bei unserer Recherche konnten wir weitere Schutzmaßnahmen für die Stromnetzwerke feststellen. Diese sind zwar nicht in der Lage eine hundert prozentige Sicherheit gegen MaDIoT 2.0 Angriffe zu gewährleisten, dennoch können sie die Sicherheit des Stromnetzes verbessern. Was uns die vollständige Korrektheit der Gegenmaßnahmen der Arbeit von Shekariet al. anzweifeln lässt, ist die Tatsache, dass sie keine weiteren Gegenmaßnahmen erwähnt haben.
+\end{multicols}
+% Referenzen bitte in references.bib einfügen
+\newpage
+
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+\end{document}
